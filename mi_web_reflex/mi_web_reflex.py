@@ -2,35 +2,40 @@
 
 import reflex as rx
 
-from rxconfig import config
-
-
+# Definimos el Estado para que el botón sea interactivo
 class State(rx.State):
-    """The app state."""
+    saludo: str = "¡Bienvenida a mi primera página web!"
 
+    def actualizar_texto(self):
+        self.saludo = "¡El botón funciona! Proyecto completado con éxito."
 
 def index() -> rx.Component:
-    # Welcome Page (Index)
-    return rx.container(
-        rx.color_mode.button(position="top-right"),
+    return rx.center(
         rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
+            # 1. Título principal
+            rx.heading("Proyecto de Informática: Reflex", size="9", color_scheme="indigo"),
+            
+            # 2. Texto de bienvenida (que cambiará al pulsar el botón)
+            rx.text(State.saludo, font_size="1.5em", font_weight="bold"),
+            
+            # 3. Botón interactivo
+            rx.button(
+                "Presiona para interactuar", 
+                on_click=State.actualizar_texto,
+                size="3",
+                color_scheme="grass"
             ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
-            ),
+            
             spacing="5",
-            justify="center",
-            min_height="85vh",
+            align="center",
+            padding="2em",
+            box_shadow="lg",
+            border_radius="15px",
+            bg="white",
         ),
+        height="100vh",
+        background="linear-gradient(to top, #dfe9f3 0%, white 100%)",
     )
-
 
 app = rx.App()
 app.add_page(index)
