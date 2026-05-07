@@ -19,7 +19,7 @@ Para ejecutar este proyecto, necesitas tener instalado:
 
 2. **Configurar el entorno con Poetry:**
    ```bash
-   poetry env use python3.11
+   poetry env use python3.10
    poetry install
    Activar el entorno virtual
    ```
